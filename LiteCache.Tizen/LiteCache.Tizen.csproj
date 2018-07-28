@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Property Group for Tizen Project -->
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <TizenCreateTpkOnBuild>false</TizenCreateTpkOnBuild>
+    <Authors>Ahmad Tantowi</Authors>
+    <Company>Ahmad Tantowi</Company>
+    <Product>LiteCache.Tizen (netstandard2.0)</Product>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>A simple library for caching any data structure and specific amount of time in TIZEN application. Powered by LiteDB</Description>
+    <Copyright>2018 Ahmad Tantowi</Copyright>
+    <PackageTags>xamarin, tizen, mobile, tv, wearable, cache</PackageTags>
+    <NeutralLanguage>English</NeutralLanguage>
+    <Version>0.1.0</Version>
+    <PackageProjectUrl>https://github.com/ahmadtantowi/LiteCache.Tizen</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ahmadtantowi/LiteCache.Tizen</RepositoryUrl>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>None</DebugType>
+  </PropertyGroup>
+
+  <!-- Include Nuget Package for Tizen Project building -->
+  <ItemGroup>
+    <PackageReference Include="LiteDB" Version="4.1.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Tizen.NET" Version="4.0.0">
+      <ExcludeAssets>Runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Tizen.NET.Sdk" Version="1.0.1" />
+  </ItemGroup>
+
+</Project>
