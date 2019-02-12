@@ -13,9 +13,6 @@ namespace LiteCache.TestApp
     {
         public App()
         {
-			Cotton.CacheDirectory = DependencyService.Get<IDirectory>().ApplicationPath();
-			Cotton.Current.Create("Hi", "This is yarn inside cotton!", TimeSpan.MaxValue);
-
 			// The root page of your application
 			MainPage = new ContentPage
 			{
@@ -25,13 +22,18 @@ namespace LiteCache.TestApp
 					Children = {
 						new Label {
 							HorizontalTextAlignment = TextAlignment.Center,
-							Text = "Welcome to Xamarin Forms!"
+							Text = "Welcome to LiteCache.Tizen on Xamarin Forms!"
 						},
 						new Label
 						{
 							HorizontalTextAlignment = TextAlignment.Center,
-							Text = "LiteCache data: " + Cotton.Current.Read("Hi")
-						}
+                            Text = $"Cached key: {Cotton.Current.ReadKeys().FirstOrDefault()}"
+						},
+                        new Label
+                        {
+                            HorizontalTextAlignment = TextAlignment.Center,
+							Text = "LiteCache data: " + Cotton.Current.Read(Cotton.Current.ReadKeys().FirstOrDefault())
+                        }
                     }
                 }
             };

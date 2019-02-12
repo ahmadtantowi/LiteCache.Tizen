@@ -1,4 +1,6 @@
+using LiteCache.Tizen;
 using System;
+using Xamarin.Forms;
 
 namespace LiteCache.TestApp
 {
@@ -7,7 +9,10 @@ namespace LiteCache.TestApp
         protected override void OnCreate()
         {
             base.OnCreate();
-            
+
+            Cotton.CacheDirectory = DependencyService.Get<IDirectory>().ApplicationPath();
+            Cotton.Current.Create("Greetings", "This is yarn inside cotton!", TimeSpan.FromDays(1));
+
             LoadApplication(new App());
         }
 
