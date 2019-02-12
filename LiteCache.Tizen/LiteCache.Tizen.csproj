@@ -9,10 +9,10 @@
     <Product>LiteCache.Tizen (netstandard2.0)</Product>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>A simple library for caching any data structure and specific amount of time in TIZEN application. Powered by LiteDB</Description>
-    <Copyright>2018 Ahmad Tantowi</Copyright>
+    <Copyright>2019 Ahmad Tantowi</Copyright>
     <PackageTags>xamarin, tizen, mobile, tv, wearable, cache</PackageTags>
     <NeutralLanguage>English</NeutralLanguage>
-    <Version>0.1.0</Version>
+    <Version>0.2.0</Version>
     <PackageProjectUrl>https://github.com/ahmadtantowi/LiteCache.Tizen</PackageProjectUrl>
     <RepositoryUrl>https://github.com/ahmadtantowi/LiteCache.Tizen</RepositoryUrl>
   </PropertyGroup>
