@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LiteCache.Tizen.Enums;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -13,6 +14,7 @@ namespace LiteCache.Tizen
 		void DeleteExpired();
 		string Read(string key);
 		T Read<T>(string key);
+        IEnumerable<string> ReadKeys(CacheState state = CacheState.Active);
 		bool IsExpired(string key);
 		bool IsExists(string key);
 

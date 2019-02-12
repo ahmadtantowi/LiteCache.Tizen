@@ -1,9 +1,12 @@
-﻿using LiteDB;
+﻿using LiteCache.Tizen.Enums;
+using LiteCache.Tizen.Extensions;
+using LiteDB;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace LiteCache.Tizen
@@ -72,8 +75,8 @@ namespace LiteCache.Tizen
 			}
 			catch (Exception exc)
 			{
-				Debug.Write($"{nameof(Create)}: {exc.Message}");
-			}
+                exc.WriteFormattedMessageToDebugConsole(typeof(Cotton));
+            }
 
 			return false;
 		}
@@ -88,8 +91,8 @@ namespace LiteCache.Tizen
 			}
 			catch (Exception exc)
 			{
-				Debug.WriteLine($"{nameof(Create)}: {exc.Message}");
-			}
+                exc.WriteFormattedMessageToDebugConsole(typeof(Cotton));
+            }
 
 			return false;
 		}
@@ -136,8 +139,8 @@ namespace LiteCache.Tizen
 			}
 			catch (Exception exc)
 			{
-				Debug.WriteLine($"{nameof(Read)}: {exc.Message}");
-			}
+                exc.WriteFormattedMessageToDebugConsole(typeof(Cotton));
+            }
 
 			return string.Empty;
 		}
@@ -152,11 +155,41 @@ namespace LiteCache.Tizen
 			}
 			catch (Exception exc)
 			{
-				Debug.WriteLine($"{nameof(Read)}: {exc.Message}");
-			}
+                exc.WriteFormattedMessageToDebugConsole(typeof(Cotton));
+            }
 
 			return default(T);
 		}
+
+        public IEnumerable<string> ReadKeys(CacheState state = CacheState.Active)
+        {
+            try
+            {
+                IEnumerable<Yarn> allYarns = _column.FindAll();
+
+                if (allYarns != null)
+                {
+                    IEnumerable<Yarn> yarns = new List<Yarn>();
+
+                    if (state.HasFlag(CacheState.Active))
+                    {
+                        yarns = allYarns.Where(x => ReadExpirationTime(x.Id) >= DateTime.UtcNow);
+                    }
+                    else if (state.HasFlag(CacheState.Expired))
+                    {
+                        yarns = allYarns.Where(x => ReadExpirationTime(x.Id) < DateTime.UtcNow);
+                    }
+
+                    return yarns.Select(x => x.Id);
+                }
+            }
+            catch (Exception exc)
+            {
+                exc.WriteFormattedMessageToDebugConsole(typeof(Cotton));
+            }
+
+            return default(IEnumerable<string>);
+        }
 
 		public DateTime? ReadExpirationTime(string key)
 		{
@@ -164,5 +197,5 @@ namespace LiteCache.Tizen
 
 			return ent?.ExpirationTime;
 		}
-	}
+    }
 }
