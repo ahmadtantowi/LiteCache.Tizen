@@ -15,10 +15,10 @@ namespace LiteCache.Tizen
 		public static string BasePath(string applicationPath)
 		{
 			if (string.IsNullOrWhiteSpace(applicationPath))
-				throw new ArgumentException("You must set a ApplicationId for LiteCache by using Cotton.ApplicationId.");
+				throw new ArgumentException("You must set a cache directory for LiteCache by using Cotton.CacheDirectory");
 
 			if (applicationPath.IndexOfAny(Path.GetInvalidPathChars()) != -1)
-				throw new ArgumentException("ApplicationId has invalid characters");
+				throw new ArgumentException("Cache directory has invalid characters");
 
 			return Path.Combine(applicationPath);
 		}
